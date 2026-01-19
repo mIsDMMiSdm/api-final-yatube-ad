@@ -1,9 +1,8 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from api.views import (
-    CommentViewSet, FollowViewSet, GroupViewSet, PostViewSet, TokenCreateView
+    CommentViewSet, FollowViewSet, GroupViewSet, PostViewSet
 )
 
 router = DefaultRouter()
@@ -18,7 +17,5 @@ router.register(
 
 urlpatterns = [
     path('v1/', include(router.urls)),
-    path('v1/jwt/create/', TokenCreateView.as_view(), name='jwt-create'),
-    path('v1/jwt/refresh/', TokenRefreshView.as_view(), name='jwt-refresh'),
-    path('v1/jwt/verify/', TokenVerifyView.as_view(), name='jwt-verify'),
+    path('v1/jwt/', include('djoser.urls.jwt')),
 ]
