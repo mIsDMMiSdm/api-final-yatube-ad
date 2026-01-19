@@ -1,8 +1,7 @@
-from rest_framework import mixins, status, viewsets
+from rest_framework import mixins, viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from djoser.views import TokenCreateView as DjoserTokenCreateView
 
 from api.permissions import IsAuthorOrReadOnly
