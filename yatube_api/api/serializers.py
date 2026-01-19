@@ -64,24 +64,6 @@ class FollowSerializer(serializers.ModelSerializer):
         return value
 
 
-class CustomTokenCreateSerializer(serializers.Serializer):
+class CustomTokenCreateSerializer(TokenCreateSerializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
-
-    def validate(self, attrs):
-        from django.contrib.auth import authenticate
-        username = attrs.get('username')
-        password = attrs.get('password')
-        if username and password:
-            user = authenticate(
-                request=self.context.get('request'),
-                username=username,
-                password=password
-            )
-            if not user:
-                from rest_framework.exceptions import AuthenticationFailed
-                raise AuthenticationFailed(
-                    'Unable to log in with provided credentials.'
-                )
-            attrs['user'] = user
-        return attrs
