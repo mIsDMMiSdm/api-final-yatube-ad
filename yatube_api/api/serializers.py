@@ -65,9 +65,5 @@ class FollowSerializer(serializers.ModelSerializer):
 
 
 class CustomTokenCreateSerializer(TokenCreateSerializer):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if 'username' in self.fields:
-            self.fields['username'].required = True
-        if 'password' in self.fields:
-            self.fields['password'].required = True
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)

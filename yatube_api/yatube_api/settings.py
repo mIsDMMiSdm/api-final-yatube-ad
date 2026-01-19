@@ -130,8 +130,15 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD': 'username',
     'USER_ID_FIELD': 'id',
+    'HIDE_USERS': False,
     'SERIALIZERS': {
+        'user': 'djoser.serializers.UserSerializer',
+        'current_user': 'djoser.serializers.UserSerializer',
         'token_create': 'api.serializers.CustomTokenCreateSerializer',
+    },
+    'PERMISSIONS': {
+        'user': ['rest_framework.permissions.AllowAny'],
+        'user_list': ['rest_framework.permissions.AllowAny'],
     },
 }
 
