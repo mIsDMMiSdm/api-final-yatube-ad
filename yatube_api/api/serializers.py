@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from rest_framework.relations import SlugRelatedField
 from rest_framework.validators import UniqueTogetherValidator
+from djoser.serializers import TokenCreateSerializer
 
 from posts.models import Comment, Follow, Group, Post
 
@@ -61,3 +62,8 @@ class FollowSerializer(serializers.ModelSerializer):
                 'Нельзя подписаться на самого себя'
             )
         return value
+
+
+class CustomTokenCreateSerializer(TokenCreateSerializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
