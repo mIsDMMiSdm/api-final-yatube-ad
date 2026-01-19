@@ -61,8 +61,5 @@ class FollowViewSet(
 class TokenCreateView(DjoserTokenCreateView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        if not serializer.is_valid():
-            return Response(
-                serializer.errors, status=status.HTTP_400_BAD_REQUEST
-            )
+        serializer.is_valid(raise_exception=True)
         return super().post(request, *args, **kwargs)
