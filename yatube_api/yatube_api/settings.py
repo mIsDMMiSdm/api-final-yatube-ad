@@ -103,10 +103,10 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    'SERIALIZERS': {},
-    'PERMISSIONS': {},
-    'TOKEN_MODEL': None,
     'LOGIN_FIELD': 'username',
+    'SERIALIZERS': {
+        'token_create': 'api.serializers.CustomTokenCreateSerializer',
+    },
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
