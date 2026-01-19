@@ -1,11 +1,9 @@
 from rest_framework import mixins, status, viewsets
-from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from djoser.views import TokenCreateView as DjoserTokenCreateView
-from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from api.permissions import IsAuthorOrReadOnly
 from api.serializers import (
@@ -64,5 +62,7 @@ class TokenCreateView(DjoserTokenCreateView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST
+            )
         return super().post(request, *args, **kwargs)
