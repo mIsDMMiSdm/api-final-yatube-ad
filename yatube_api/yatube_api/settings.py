@@ -101,4 +101,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
+DJOSER = {
+    'SERIALIZERS': {},
+    'PERMISSIONS': {},
+    'TOKEN_MODEL': None,
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
